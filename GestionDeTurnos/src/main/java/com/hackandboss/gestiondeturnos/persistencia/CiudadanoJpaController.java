@@ -2,6 +2,7 @@
 package com.hackandboss.gestiondeturnos.persistencia;
 
 import com.hackandboss.gestiondeturnos.logica.Ciudadano;
+import com.hackandboss.gestiondeturnos.logica.Turno;
 import com.hackandboss.gestiondeturnos.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -129,6 +131,25 @@ public class CiudadanoJpaController implements Serializable {
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
+            em.close();
+        }
+    }
+
+    Ciudadano buscarCiudadanoPorDni(String dni) {
+        
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Ciudadano> cq = cb.createQuery(Ciudadano.class);
+            Root<Ciudadano> ciudadanoRoot = cq.from(Ciudadano.class);
+
+            // Agregar un filtro para seleccionar empleados por el atributo especificado y que estén activos
+            cq.where(cb.equal(ciudadanoRoot.get("dni"), dni));
+
+            Query q = em.createQuery(cq);
+            return (Ciudadano) q.getSingleResult();
+        } 
+        finally {
             em.close();
         }
     }

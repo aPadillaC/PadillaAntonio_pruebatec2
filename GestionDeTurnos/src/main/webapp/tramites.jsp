@@ -14,14 +14,15 @@
     <body>
         <div class="container">
             
-            
+            <% if (request.getAttribute("listaTramites") == null) { %>
             <form action="TramitesSV" method="get">
                 <button type="submit">Crear nuevo</button>
             </form>
             
-            <form>
-                <button type="submit">Editar trámite</button>
+            <form action="TramitesSV" method="put">
+                <button type="submit"><a href="editarTramite.jsp" class="text-decoration-none">Editar trámite<a/></button>
             </form>
+            <% } %>
             
             <% if (request.getAttribute("listaTramites") != null) { %>
             <h1>Formulario</h1>

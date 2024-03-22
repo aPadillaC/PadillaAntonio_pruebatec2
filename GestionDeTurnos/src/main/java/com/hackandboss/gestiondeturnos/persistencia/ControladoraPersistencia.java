@@ -38,6 +38,16 @@ public class ControladoraPersistencia {
         return ciudadanoJpa.findCiudadanoEntities();
     }
 
+    public Ciudadano buscarCiudadano(String dni) {
+        
+        return ciudadanoJpa.buscarCiudadanoPorDni(dni);
+    }
+
+    public List<Turno> buscarTurnosCiudadano(Long id) {
+        
+        return turnoJpa.buscarTurnosCiudadano(id);
+    }
+
     
     
 }

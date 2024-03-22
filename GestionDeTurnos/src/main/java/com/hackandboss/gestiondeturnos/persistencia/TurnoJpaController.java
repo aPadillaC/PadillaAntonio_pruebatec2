@@ -13,6 +13,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Join;
 
 
 public class TurnoJpaController implements Serializable {
@@ -162,5 +164,19 @@ public class TurnoJpaController implements Serializable {
             em.close();
         }
     }
+
+    List<Turno> buscarTurnosCiudadano(Long id) {
+        
+        EntityManager em = getEntityManager();
+        
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Turno> cq = cb.createQuery(Turno.class);
+        Root<Turno> root = cq.from(Turno.class);
+        Join<Turno, Ciudadano> join = root.join("ciudadano");
+        cq.select(root).where(cb.equal(join.get("id"), id));
+        return em.createQuery(cq).getResultList();
+    }
+
+    
     
 }

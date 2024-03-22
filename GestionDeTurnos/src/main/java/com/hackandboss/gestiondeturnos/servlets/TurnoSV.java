@@ -7,6 +7,7 @@ import com.hackandboss.gestiondeturnos.logica.Tramite;
 import com.hackandboss.gestiondeturnos.logica.Turno;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +30,17 @@ public class TurnoSV extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String dni = request.getParameter("dni");
+        
+        List<Turno> turnosCiudadano = control.buscarTurnosCiudadano(dni);
+        
+        
+        
+        request.setAttribute("turnosCiudadano", turnosCiudadano);
+        
+        request.getRequestDispatcher("editarTramite.jsp").forward(request, response);
+        
     }
 
     
