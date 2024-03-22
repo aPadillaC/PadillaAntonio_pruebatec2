@@ -14,7 +14,7 @@
             
             <h1>BIENVENIDO A LA WEB DE LA CENTRAL DE TRÁFICO</h1>
             <p>Pulse para entrar</p>
-            <form action="TramitesSV" method="get">
+            <form action="TramitesSV" method="post">
                 <button>Entrar</button>
             </form>
         </div>        

@@ -4,6 +4,7 @@ package com.hackandboss.gestiondeturnos.servlets;
 import com.hackandboss.gestiondeturnos.logica.Controladora;
 import com.hackandboss.gestiondeturnos.logica.Tramite;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "TramitesSV", urlPatterns = {"/TramitesSV"})
 public class TramitesSV extends HttpServlet {
+    
+    protected List<Tramite> listaTramites = new ArrayList<>();
     
     Controladora control = new Controladora();
 
@@ -27,6 +30,19 @@ public class TramitesSV extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    
+        listaTramites = control.listaTramites();
+        
+        request.setAttribute("listaTramites", listaTramites);
+        
+        request.getRequestDispatcher("tramites.jsp").forward(request, response);
+    }
+
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
         
         List<Tramite> prueba = control.listaTramites();
         
@@ -39,27 +55,7 @@ public class TramitesSV extends HttpServlet {
         }
         
         
-        
-        
-
-
-        List<Tramite> listaTramites = control.listaTramites();
-        
-        request.setAttribute("listaTramites", listaTramites);
-        
-        System.out.println("listaTramite:" );
-        
-        request.getRequestDispatcher("vistaPrincipal.jsp").forward(request, response);
-    }
-
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        
-        
-        
+        response.sendRedirect("vistaPrincipal.jsp");
     }
 
     

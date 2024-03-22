@@ -18,6 +18,28 @@ public class Controladora {
         return controlPersis.listaTramites();
     }
 
+    public void crearCiudadano(Ciudadano ciudadano) {
+        
+        controlPersis.crearCiudadano(ciudadano);
+    }
+
+    public void crearTurno(Turno turno) {
+        
+        controlPersis.crearTurno(turno);
+    }
+
+    public Ciudadano buscarCiudadano(String dni) {
+
+        Ciudadano ciudadano = controlPersis.listaCiudadanos().stream()
+                .filter( c -> c.getDni().equalsIgnoreCase(dni))
+                .findFirst()
+                .orElse(new Ciudadano());
+               
+                
+        
+        return ciudadano;
+    }
+
    
 
     

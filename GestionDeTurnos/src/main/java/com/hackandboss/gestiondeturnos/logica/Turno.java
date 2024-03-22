@@ -101,10 +101,8 @@ public class Turno implements Serializable {
         this.tramite = tramite;
     }
 
-    @Override
-    public String toString() {
-        return "Turno{" + "id=" + id + ", numero=" + numero + ", fecha=" + fecha + ", estadoCompletado=" + estadoCompletado + ", borrado=" + borrado + ", ciudadano=" + ciudadano + ", tramite=" + tramite + '}';
-    }
+ 
+    
 
     
     

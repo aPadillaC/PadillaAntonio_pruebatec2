@@ -55,10 +55,8 @@ public class Ciudadano implements Serializable {
         this.listadoTurnos = listadoTurnos;
     }
 
-    @Override
-    public String toString() {
-        return "Cuidadano{" + "id=" + id + ", dni=" + dni + ", listadoTurnos=" + listadoTurnos + '}';
-    }
+   
+   
     
     
     
