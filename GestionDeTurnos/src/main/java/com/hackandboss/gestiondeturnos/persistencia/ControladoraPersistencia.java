@@ -6,6 +6,8 @@ import com.hackandboss.gestiondeturnos.logica.Ciudadano;
 import com.hackandboss.gestiondeturnos.logica.Tramite;
 import com.hackandboss.gestiondeturnos.logica.Turno;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ControladoraPersistencia {
     
@@ -46,6 +48,27 @@ public class ControladoraPersistencia {
     public List<Turno> buscarTurnosCiudadano(Long id) {
         
         return turnoJpa.buscarTurnosCiudadano(id);
+    }
+
+    public Turno buscarTurno(String id) {
+        
+        Long idLong = Long.parseLong(id);
+        
+        return turnoJpa.findTurno(idLong);
+    }
+
+    public void editarTurno(Turno turno) {
+
+        try {
+            turnoJpa.edit(turno);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<Turno> listadoTotalTurnos() {
+        
+        return turnoJpa.findTurnoEntities();
     }
 
     

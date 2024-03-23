@@ -10,7 +10,7 @@
             <a class="nav-link active fw-semibold  ms-5" aria-current="page" href="tramites.jsp">Trámites</a>
           </li>                
           <li class="nav-item">
-            <a class="nav-link active fw-semibold  ms-5" href="/object/createObjectNavBar">Listado Turnos</a>
+            <a class="nav-link active fw-semibold  ms-5" href="principalListado.jsp">Listado Turnos</a>
           </li>                           
         </ul>
         <form class="d-flex" action="/collector/search" method="post">

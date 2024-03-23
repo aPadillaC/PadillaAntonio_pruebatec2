@@ -58,7 +58,7 @@ public class TurnoSV extends HttpServlet {
         
         Ciudadano ciudadano = control.buscarCiudadano(dni);
         
-        if (ciudadano.getDni().isEmpty()) {
+        if (ciudadano.getDni() == null) {
             
             ciudadano.setDni(dni);
             control.crearCiudadano(ciudadano);

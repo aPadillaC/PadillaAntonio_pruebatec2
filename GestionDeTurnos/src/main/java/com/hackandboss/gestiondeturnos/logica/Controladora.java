@@ -2,7 +2,7 @@
 package com.hackandboss.gestiondeturnos.logica;
 
 import com.hackandboss.gestiondeturnos.persistencia.ControladoraPersistencia;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Controladora {
@@ -49,9 +49,63 @@ public class Controladora {
         
         List<Turno> turnosCiudadanoActivos = controlPersis.buscarTurnosCiudadano(ciudadano.getId()).stream()
                 .filter( turno -> turno.isBorrado() == false)
+                .filter(turno -> turno.isEstadoCompletado() == false)
                 .toList();
         
         return turnosCiudadanoActivos;
+    }
+
+    public Turno buscarTurno(String id) {
+        
+        return controlPersis.buscarTurno(id);
+    }
+
+    public void editarTurno(Turno turno) {
+
+        controlPersis.editarTurno(turno);
+    }
+
+    public List<Turno> listadoTotalTurnos() {
+        
+        return controlPersis.listadoTotalTurnos();
+    }
+
+    public List<LocalDate> listadoFechas() {
+        
+         return listadoTotalTurnos().stream()
+                .map( turno -> turno.getFecha())
+                .distinct()
+                .toList();
+                
+    }
+
+    public List<Turno> turnosFiltrados(LocalDate fecha, String estado) {
+        
+        if( estado == null) {
+            return listadoTotalTurnos().stream()
+                .filter( turno -> turno.isBorrado() == false)
+                .filter( turno -> turno.getFecha().equals(fecha))
+                .toList();
+        }
+        else {
+            
+            if ("espera".equals(estado)){
+                
+                return listadoTotalTurnos().stream()
+                .filter( turno -> turno.isBorrado() == false)
+                .filter( turno -> turno.getFecha().equals(fecha))
+                .filter( turno -> turno.isEstadoCompletado() == false)
+                .toList();
+            }
+            
+                
+            return listadoTotalTurnos().stream()
+            .filter( turno -> turno.isBorrado() == false)
+            .filter( turno -> turno.getFecha().equals(fecha))
+            .filter( turno -> turno.isEstadoCompletado() == true)
+            .toList();
+           
+        }
     }
 
     

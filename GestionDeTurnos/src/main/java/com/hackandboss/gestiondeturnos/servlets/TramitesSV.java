@@ -49,7 +49,7 @@ public class TramitesSV extends HttpServlet {
         if ( prueba.isEmpty() ) {
             
             control.crearTramite(new Tramite("Multa"));
-            control.crearTramite(new Tramite("Vehículos"));
+            control.crearTramite(new Tramite("Vehiculos"));
             control.crearTramite(new Tramite("Permiso Conducir"));
             control.crearTramite(new Tramite("Otros"));
         }
@@ -57,6 +57,8 @@ public class TramitesSV extends HttpServlet {
         
         response.sendRedirect("vistaPrincipal.jsp");
     }
+    
+      
 
     
     @Override
