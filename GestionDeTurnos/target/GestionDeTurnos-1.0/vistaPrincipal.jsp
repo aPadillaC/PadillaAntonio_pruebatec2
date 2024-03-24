@@ -38,7 +38,7 @@
         <div class="container-fluid bg-image pt-2 centered">
             <div class="row justify-content-between align-items-center text-center bg-container">
                 <div class="col-12 mb-4">
-                    <h3 class="custom-text-shadow">Para cada tipo de trámite podrá realizar las siguientes gestiones</h3>
+                    <h3 class="custom-text-shadow pt-2">Para cada tipo de trámite podrá realizar las siguientes gestiones</h3>
                 </div>
                 <div class="col-6 mb-4">
                   <div class="p-4 border rounded border-dark custom-box-shadow bg-white">

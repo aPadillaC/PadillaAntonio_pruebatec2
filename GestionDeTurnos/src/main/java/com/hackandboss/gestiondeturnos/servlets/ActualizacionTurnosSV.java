@@ -35,13 +35,13 @@ public class ActualizacionTurnosSV extends HttpServlet {
         
         Turno turno = control.buscarTurno(id);
         
-         System.out.println("id " + id);
+         System.out.println("listaTramites " + listaTramites);
         
         request.setAttribute("tramites", listaTramites);
         request.setAttribute("turno", turno);
         
         
-        request.getRequestDispatcher("editarTramite.jsp").forward(request, response);
+        request.getRequestDispatcher("actualizacionTurnos.jsp").forward(request, response);
         
     }
 

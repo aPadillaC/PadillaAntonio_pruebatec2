@@ -45,52 +45,56 @@
             .bg-container {
                 color: black;
                 background-color: RGBA(255,255,255, 0.6);
-                padding: inherit 5vh;
+                padding: 5vh;
             }
         </style>
     </head>
     <body>
         <div class="container-fluid">
             <div class="bg-image">
+                
+                
+                <!-- Seleccionamos que deseamos hacer: Crear o Editar turno -->
                 <% if (request.getAttribute("listaTramites") == null) { %>
                     <div class="d-flex justify-content-around centered">
                         <form action="TramitesSV" method="get">
                             <button type="submit" class="btn btn-lg btn-primary p-5 btn-circle custom-box-shadow custom-text-shadow">Crear nuevo</button>
                         </form>
 
-                        <form action="TramitesSV" method="put">
-                            <button type="submit" class="btn btn-lg btn-primary p-5 btn-circle custom-box-shadow custom-text-shadow"><a href="editarTramite.jsp" class="text-decoration-none text-white">Editar trámite<a/></button>
+                        <form>
+                            <button  class="btn btn-lg btn-primary p-5 btn-circle custom-box-shadow custom-text-shadow"><a href="actualizacionTurnos.jsp" class="text-decoration-none text-white">Editar un turno<a/></button>
                         </form>
                     </div>
                 <% } %>
 
+                
+                
+                <!-- Formulario para el registro de un nuevo turno -->
                 <% if (request.getAttribute("listaTramites") != null) { %>
                     <div class="bg-container pt-2">
-                        <h1>Formulario</h1>
-                            <form action="TurnoSV" method="post">
-                              <div class="form-group">
+                        <h1>Registro de nuevo turno</h1>
+                        <form action="TurnoSV" method="post">
+                            <div class="form-group w-25">
                                 <label for="nombre">Ingrese su DNI: </label>
-                                <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese su DNI">
-                              </div>
-                              <div class="form-group ">
+                                <input type="text" class="form-control custom-box-shadow" id="dni" name="dni" placeholder="Ingrese su DNI">
+                            </div>
+                            <div class="form-group w-25">
                                 <label for="ciudad">Selecciona una opción</label>
-                                <select class="form-control" name="tramite">
+                                <select class="form-control custom-box-shadow" name="tramite">
                                     <%  
                                         List<Tramite> listaTramites = (List<Tramite>) request.getAttribute("listaTramites");
                                         for ( Tramite tramite : listaTramites) {
                                     %>
-                                    <option value="<%= tramite.getDescripcion() %>"><%= tramite.getDescripcion() %></option>
+                                        <option value="<%= tramite.getDescripcion() %>"><%= tramite.getDescripcion() %></option>
                                     <% } %>
                                 </select>
-                              </div>
-                              <button type="submit" class="btn btn-primary" name="guardar">Guardar</button>
-                            </form>
+                            </div>
+                            <button type="submit" class="btn btn-primary" name="guardar">Registrar</button>
+                        </form>
                     </div>
                     
                 <% } %>
             </div>
-            
-            
             
         </div>        
         <!-- Scripts de Bootstrap -->

@@ -39,7 +39,7 @@ public class TurnoSV extends HttpServlet {
         
         request.setAttribute("turnosCiudadano", turnosCiudadano);
         
-        request.getRequestDispatcher("editarTramite.jsp").forward(request, response);
+        request.getRequestDispatcher("actualizacionTurnos.jsp").forward(request, response);
         
     }
 
