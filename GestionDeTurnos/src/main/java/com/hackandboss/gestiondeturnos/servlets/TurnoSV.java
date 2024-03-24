@@ -27,6 +27,7 @@ public class TurnoSV extends HttpServlet {
     }
 
     
+    // Mostramos todos los turnos de un ciudadano
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,8 +36,6 @@ public class TurnoSV extends HttpServlet {
         
         List<Turno> turnosCiudadano = control.buscarTurnosCiudadano(dni);
         
-        
-        
         request.setAttribute("turnosCiudadano", turnosCiudadano);
         
         request.getRequestDispatcher("actualizacionTurnos.jsp").forward(request, response);
@@ -44,6 +43,7 @@ public class TurnoSV extends HttpServlet {
     }
 
     
+    // Creamos un nuevo turno
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,30 +51,11 @@ public class TurnoSV extends HttpServlet {
         String dni = request.getParameter("dni");
         String tramiteString = request.getParameter("tramite");
         
-        Tramite tramite = control.listaTramites().stream()
-                .filter( t -> t.getDescripcion().equalsIgnoreCase(tramiteString))
-                .findFirst()
-                .orElse(new Tramite());
+        Tramite tramite = control.obtenerTramiteSeleccionado(tramiteString);
         
-        Ciudadano ciudadano = control.buscarCiudadano(dni);
+        Ciudadano ciudadano = control.verificarCrearCiudadano(dni);
         
-        if (ciudadano.getDni() == null) {
-            
-            ciudadano.setDni(dni);
-            control.crearCiudadano(ciudadano);
-        }
-        //Ciudadano ciudadano = new Ciudadano();
-        Turno turno = new Turno();
-        
-        // ciudadano.setDni(dni);
-        
-        turno.setCiudadano(ciudadano);
-        turno.setTramite(tramite);
-        turno.setNumero(turno.getId());
-        
-        
-        
-        control.crearTurno(turno);
+        control.crearTurno(ciudadano, tramite);
         
         response.sendRedirect("vistaPrincipal.jsp");
 

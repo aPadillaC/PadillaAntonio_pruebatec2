@@ -1,5 +1,6 @@
 
 
+
 <%@page import="com.hackandboss.gestiondeturnos.logica.Turno"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="com.hackandboss.gestiondeturnos.logica.Tramite"%>
@@ -51,6 +52,8 @@
                 
                 <div class="bg-container">
             
+                    
+                <!-- Filtramos por la fecha que queramos -->
                 <% if (request.getAttribute("turnosFiltrado") == null) { %>
                 <form action="TurnosFechaSV" method="post">
                   <div class="form-group w-25">
@@ -74,6 +77,9 @@
                 
                     <% if (request.getAttribute("turnosFiltrado") != null) { %>
                     <h2 class="custom-text-shadow">Listado turno de la fecha indicada:</h2>
+                    <% if (request.getAttribute("estado")!= null) { %>
+                    <label>Filtrado por "<%= request.getAttribute("estado") %>"</label>
+                    <% } %>
                         <table class="table mt-3 table-info custom-box-shadow">
                             <thead>
                                 <tr>
@@ -103,21 +109,24 @@
 
                             
                         <!-- Filtro para ver solo turnos En Espera o Atendidos en la fecha indicada-->
+                        <% if (request.getAttribute("estado") == null) { %>
                         <form action="TurnosFechaSV" method="post">
-                            <div class="form-group custom-box-shadow w-25">
+                            <div class="form-group w-25">
                                 <label for="ciudad" class="custom-text-shadow">Filtrar por estado:</label>
                                 <select class="form-control custom-box-shadow" name="estado">
-                                    <option value="espera">En espera</option>                          
-                                    <option value="atendido">Atendido</option>
+                                    <option value="En espera">En espera</option>                          
+                                    <option value="Atendido">Atendido</option>
                                 </select>
                             </div>
+                            
                              <% 
                             List<Turno> listado = (List<Turno>) request.getAttribute("turnosFiltrado");
                             LocalDate fecha = listado.get(0).getFecha();
                             %>
                             <input type="hidden" value="<%=fecha%>" name="fecha">
-                            <button type="submit" class="btn btn-primary custom-box-shadow" name="guardar">Filtrar</button>
+                            <button type="submit" class="btn btn-primary custom-box-shadow" name="guardar">Filtrar</button>                          
                         </form>
+                        <% } %>                        
                         <hr class="border-dark">
                         <button class="btn btn-primary custom-box-shadow"><a href="vistaPrincipal.jsp" class="text-decoration-none text-white">Volver al menú principal</a></button>
                     <% } %>

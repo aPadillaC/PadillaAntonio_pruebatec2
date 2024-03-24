@@ -34,8 +34,8 @@
               box-shadow:4px 4px 8px rgba(0, 0, 0, 0.5);
             }
             .btn-circle {
-                width: 250px;
-                height: 250px;
+                width: 280px;
+                height: 280px;
                 border-radius: 50%;
                 text-align: center;
                 padding: 0;

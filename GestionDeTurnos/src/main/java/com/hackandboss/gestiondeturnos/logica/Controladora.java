@@ -24,7 +24,12 @@ public class Controladora {
         controlPersis.crearCiudadano(ciudadano);
     }
 
-    public void crearTurno(Turno turno) {
+    public void crearTurno(Ciudadano ciudadano, Tramite tramite) {
+        
+        Turno turno = new Turno();
+        
+        turno.setCiudadano(ciudadano);
+        turno.setTramite(tramite);
         
         controlPersis.crearTurno(turno);
     }
@@ -35,8 +40,7 @@ public class Controladora {
                 .filter( c -> c.getDni().equalsIgnoreCase(dni))
                 .findFirst()
                 .orElse(new Ciudadano());
-               
-                
+                       
         
         return ciudadano;
     }
@@ -60,14 +64,21 @@ public class Controladora {
         return controlPersis.buscarTurno(id);
     }
 
-    public void editarTurno(Turno turno) {
+    public void editarTurno(Turno turno, Tramite tramite) {
+        
+        turno.setTramite(tramite);
 
         controlPersis.editarTurno(turno);
     }
 
     public List<Turno> listadoTotalTurnos() {
         
-        return controlPersis.listadoTotalTurnos();
+        return controlPersis.listadoTotalTurnos().stream()
+                .filter( turno -> turno.isBorrado() == false)
+                .filter( turno -> turno.isEstadoCompletado() == false)
+                .sorted((f1, f2) -> f1.getFecha().compareTo(f2.getFecha()))
+                .toList();
+        
     }
 
     public List<LocalDate> listadoFechas() {
@@ -82,29 +93,70 @@ public class Controladora {
     public List<Turno> turnosFiltrados(LocalDate fecha, String estado) {
         
         if( estado == null) {
-            return listadoTotalTurnos().stream()
+            return controlPersis.listadoTotalTurnos().stream()
                 .filter( turno -> turno.isBorrado() == false)
                 .filter( turno -> turno.getFecha().equals(fecha))
                 .toList();
         }
         else {
             
-            if ("espera".equals(estado)){
+            if ("Atendido".equals(estado)){
                 
-                return listadoTotalTurnos().stream()
+                return controlPersis.listadoTotalTurnos().stream()
                 .filter( turno -> turno.isBorrado() == false)
                 .filter( turno -> turno.getFecha().equals(fecha))
-                .filter( turno -> turno.isEstadoCompletado() == false)
+                .filter( turno -> turno.isEstadoCompletado() == true)
                 .toList();
             }
             
                 
-            return listadoTotalTurnos().stream()
+            return controlPersis.listadoTotalTurnos().stream()
             .filter( turno -> turno.isBorrado() == false)
             .filter( turno -> turno.getFecha().equals(fecha))
-            .filter( turno -> turno.isEstadoCompletado() == true)
+            .filter( turno -> turno.isEstadoCompletado() == false)
             .toList();
            
+        }
+    }
+
+    public Tramite obtenerTramiteSeleccionado(String tramiteString) {
+        
+        return listaTramites().stream()
+                .filter( t -> t.getDescripcion().equalsIgnoreCase(tramiteString))
+                .findFirst()
+                .orElse(new Tramite());
+    }
+
+    public Ciudadano verificarCrearCiudadano(String dni) {
+        
+        //Compruebo si el dni existe ya en la BBDD
+        Ciudadano ciudadano = buscarCiudadano(dni);
+        
+        if (ciudadano.getDni() == null) {
+            
+            ciudadano.setDni(dni);
+            crearCiudadano(ciudadano);
+        }
+        
+        return ciudadano;
+    }
+
+    public void turnoCompletado(String id) {
+        
+        Turno turno = controlPersis.buscarTurno(id);
+        
+        turno.setEstadoCompletado(true);
+        
+        controlPersis.editarTurno(turno);
+    }
+
+    public void verificarInsertarTramites(List<String> listaTramites) {
+        
+        List<Tramite> tramites = listaTramites();
+        
+        if ( tramites.isEmpty() ) {
+            
+            listaTramites.forEach( tramite -> crearTramite(new Tramite(tramite)));
         }
     }
 

@@ -26,6 +26,7 @@ public class TurnosFechaSV extends HttpServlet {
     }
 
     
+    // Obtenemos listado de fechas existente en la BBDD
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,22 +41,21 @@ public class TurnosFechaSV extends HttpServlet {
     }
 
     
+    
+    // Enviado todos los turnos por la fecha filtrada
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         String fechaString = request.getParameter("fecha");
         LocalDate fecha = LocalDate.parse(fechaString);
-        String estado = request.getParameter("estado");
-        
-        System.out.println("estado" + estado);
-        
+        String estado = request.getParameter("estado");        
                 
-        List<Turno> turnosFiltrado = control.turnosFiltrados(fecha, estado);
+        List<Turno> turnosFiltrado = control.turnosFiltrados(fecha, estado);        
         
+        request.setAttribute("turnosFiltrado", turnosFiltrado);  
         
-        request.setAttribute("turnosFiltrado", turnosFiltrado);
-        
+        request.setAttribute("estado", estado);        
         
         request.getRequestDispatcher("filtroFecha.jsp").forward(request, response);
         

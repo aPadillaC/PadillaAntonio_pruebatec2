@@ -77,6 +77,7 @@
                             <thead>
                                 <tr>
                                     <th>Nº turno</th>
+                                    <th>Usuario</th>
                                     <th>Fecha</th>
                                     <th>Tramite</th>
                                     <th>Estado</th>
@@ -90,6 +91,7 @@
                                 %>
                                     <tr>
                                         <td><%= turno.getId() %></td>
+                                        <td><%= turno.getCiudadano().getDni() %></td>
                                         <td><%= turno.getFecha()%></td>
                                         <td><%= turno.getTramite().getDescripcion()%></td>                               
                                         <td><%= turno.isEstadoCompletado() ? "Atendido" : "En Espera" %></td>

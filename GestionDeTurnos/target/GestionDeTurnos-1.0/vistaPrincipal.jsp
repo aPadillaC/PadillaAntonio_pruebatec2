@@ -17,7 +17,7 @@
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
-                height: 100vh; /* Ajusta la altura al 100% del viewport */
+                height: 105vh; /* Ajusta la altura al 100% del viewport */
                 margin: 0; /* Elimina el margen predeterminado */
                 width: 100%;
             }

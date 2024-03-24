@@ -50,7 +50,7 @@
                 <% if (request.getAttribute("tramites") == null) { %>
                 <div class="bg-image">
                     <div class="bg-container pt-2">
-                        <h1 class="custom-text-shadow">Editar Trámite</h1>
+                        <h1 class="custom-text-shadow">Editar Turno</h1>
                         <form action="TurnoSV" method="get">
                             <div class="form-group w-25 ">
                                 <label for="nombre" class="custom-text-shadow">Introduce su DNI para mostrar sus tramites pendientes:  </label>
@@ -86,15 +86,16 @@
                                 for ( Turno turno : turnosCiudadano) { 
                                 %>
                                     <tr>
-                                        <td><%= turno.getId() %></td>
+                                        <td ><%= turno.getId() %></td>
                                         <td><%= turno.getCiudadano().getDni()%></td>
                                         <td><%= turno.getFecha()%></td>
                                         <td><%= turno.getTramite().getDescripcion()%></td>                               
                                         <td><%= turno.isEstadoCompletado() ? "Atendido" : "En Espera" %></td>
                                         <td>
-                                            <form action="ActualizacionTurnosSV" method="get">
+                                            <form class="d-flex justify-content-around align-items-center" action="ActualizacionTurnosSV" method="get">
                                                 <input type="hidden" name="id" value="<%= turno.getId()%>">
                                                 <button type="submit" class="btn btn-success custom-box-shadow">Editar</button>
+                                                <button type="submit" class="btn btn-danger custom-box-shadow">Eliminar</button>
                                             </form>
                                         </td>
                                     </tr>

@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "TramitesSV", urlPatterns = {"/TramitesSV"})
 public class TramitesSV extends HttpServlet {
     
-    protected List<Tramite> listaTramites = new ArrayList<>();
+    protected List<String> listaTramites = List.of("Multas",
+            "Vehiculos", "Permiso Conducir", "Otros");
     
     Controladora control = new Controladora();
 
@@ -27,32 +28,37 @@ public class TramitesSV extends HttpServlet {
     }
 
     
+    // Devolvemos el listado de tramites
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     
-        listaTramites = control.listaTramites();
+        List<Tramite> tramites = control.listaTramites();
         
-        request.setAttribute("listaTramites", listaTramites);
+        request.setAttribute("listaTramites", tramites);
         
         request.getRequestDispatcher("tramites.jsp").forward(request, response);
     }
 
     
+    
+    // Se rellena la tabla tramites con sus valores predeterminadas si no lo estuviera e crea el resto de tablas
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        control.verificarInsertarTramites(listaTramites);
         
-        List<Tramite> prueba = control.listaTramites();
         
-        if ( prueba.isEmpty() ) {
+        List<Tramite> listaTramites = control.listaTramites();
+        
+        //if ( listaTramites.isEmpty() ) {
             
-            control.crearTramite(new Tramite("Multa"));
-            control.crearTramite(new Tramite("Vehiculos"));
-            control.crearTramite(new Tramite("Permiso Conducir"));
-            control.crearTramite(new Tramite("Otros"));
-        }
+            //control.crearTramite(new Tramite("Multa"));
+            //control.crearTramite(new Tramite("Vehiculos"));
+            //control.crearTramite(new Tramite("Permiso Conducir"));
+            //control.crearTramite(new Tramite("Otros"));
+        //}
         
         
         response.sendRedirect("vistaPrincipal.jsp");

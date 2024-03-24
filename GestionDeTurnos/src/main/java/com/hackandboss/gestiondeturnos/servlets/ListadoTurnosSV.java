@@ -23,38 +23,28 @@ public class ListadoTurnosSV extends HttpServlet {
     }
 
     
+    // Mostramos listado de turnos pendientes 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String orden = request.getParameter("orden");
-        
-        List<Turno> listadoTotalTurnos = control.listadoTotalTurnos();
-        
-        List<Turno> listadoOrdenado = listadoTotalTurnos.stream()
-                .filter( turno -> turno.isBorrado() == false)
-                .filter( turno -> turno.isEstadoCompletado() == false)
-                .sorted((f1, f2) -> f1.getFecha().compareTo(f2.getFecha()))
-                .toList();
-        
+                
+        List<Turno> listadoOrdenado = control.listadoTotalTurnos();
+               
         request.setAttribute("listadoOrdenado", listadoOrdenado);
-        
-        
+                
         request.getRequestDispatcher("principalListado.jsp").forward(request, response);
     }
 
     
+    
+    // Marcar en la BBDD el turno como COMPLETADO
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         String id = request.getParameter("id");
         
-        Turno turno = control.buscarTurno(id);
-        
-        turno.setEstadoCompletado(true);
-        
-        control.editarTurno(turno);
+        control.turnoCompletado(id);
         
         response.sendRedirect("principalListado.jsp");
     }
