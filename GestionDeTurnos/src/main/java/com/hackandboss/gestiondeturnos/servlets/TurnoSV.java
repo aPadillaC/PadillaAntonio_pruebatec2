@@ -14,12 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 @WebServlet(name = "TurnoSV", urlPatterns = {"/TurnoSV"})
 public class TurnoSV extends HttpServlet {
     
-    TramitesSV tramitesSV = new TramitesSV();
     Controladora control = new Controladora();
     ValidadorDni validador = new ValidadorDni();
+    
 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

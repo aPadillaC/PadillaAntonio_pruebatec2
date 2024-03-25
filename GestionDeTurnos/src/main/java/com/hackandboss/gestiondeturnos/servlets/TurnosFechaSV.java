@@ -4,7 +4,6 @@ package com.hackandboss.gestiondeturnos.servlets;
 import com.hackandboss.gestiondeturnos.logica.Controladora;
 import com.hackandboss.gestiondeturnos.logica.Turno;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -34,9 +33,9 @@ public class TurnosFechaSV extends HttpServlet {
         
         List<LocalDate> fechas = control.listadoFechas();
 //        
-//        request.setAttribute("fechas", fechas);
+        //request.setAttribute("fechas", fechas);
 //        
-//        request.getRequestDispatcher("filtroFecha.jsp").forward(request, response);
+        //request.getRequestDispatcher("filtroFecha.jsp").forward(request, response);
 
         // Obtener la sesión
         HttpSession session = request.getSession();
@@ -45,8 +44,8 @@ public class TurnosFechaSV extends HttpServlet {
         session.setAttribute("fechas", fechas);
 
         // Redirigir a otra página
-        response.sendRedirect("filtroFecha.jsp");
-        
+        response.sendRedirect("filtroFecha.jsp");        
+              
     }
 
     
@@ -60,8 +59,8 @@ public class TurnosFechaSV extends HttpServlet {
         LocalDate fecha = LocalDate.parse(fechaString);
         String estado = request.getParameter("estado");        
                 
-        List<Turno> turnosFiltrado = control.turnosFiltrados(fecha, estado);       
-       
+        List<Turno> turnosFiltrado = control.turnosFiltrados(fecha, estado);   
+               
         request.setAttribute("turnosFiltrado", turnosFiltrado);  
        
         request.setAttribute("estado", estado);        

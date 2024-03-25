@@ -93,7 +93,6 @@ public class Controladora {
         return controlPersis.listadoTotalTurnos().stream()
                 .filter( turno -> turno.isBorrado() == false)
                 .filter( turno -> turno.isEstadoCompletado() == false)
-                .sorted((f1, f2) -> f1.getFecha().compareTo(f2.getFecha()))
                 .toList();
         
     }
@@ -123,7 +122,7 @@ public class Controladora {
                 .filter( turno -> turno.isBorrado() == false)
                 .filter( turno -> turno.getFecha().equals(fecha))
                 .filter( turno -> turno.isEstadoCompletado() == true)
-                .toList();
+                .toList();                
             }
             
                 
