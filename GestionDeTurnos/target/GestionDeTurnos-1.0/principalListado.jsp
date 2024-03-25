@@ -1,4 +1,5 @@
 
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="com.hackandboss.gestiondeturnos.logica.Turno"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -92,7 +93,7 @@
                                     <tr>
                                         <td><%= turno.getId() %></td>
                                         <td><%= turno.getCiudadano().getDni() %></td>
-                                        <td><%= turno.getFecha()%></td>
+                                        <td><%= turno.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))%></td>
                                         <td><%= turno.getTramite().getDescripcion()%></td>                               
                                         <td><%= turno.isEstadoCompletado() ? "Atendido" : "En Espera" %></td>
                                         <td>

@@ -1,4 +1,5 @@
 
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="com.hackandboss.gestiondeturnos.logica.Turno"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="com.hackandboss.gestiondeturnos.logica.Tramite"%>
@@ -60,7 +61,7 @@
                             List<LocalDate> fechas = (List<LocalDate>) session.getAttribute("fechas");
                             for ( LocalDate fecha : fechas) {
                         %>
-                        <option value="<%= fecha%>"><%= fecha %></option>
+                        <option value="<%= fecha%>"><%= fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) %></option>
                         <% } %>
                     </select>
                   </div>
@@ -96,7 +97,7 @@
                                 <tr>
                                     <td><%= turno.getId() %></td>
                                     <td><%= turno.getCiudadano().getDni()%></td>
-                                    <td><%= turno.getFecha()%></td>
+                                    <td><%= turno.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))%></td>
                                     <td><%= turno.getTramite().getDescripcion()%></td>                               
                                     <td><%= turno.isEstadoCompletado() ? "Atendido" : "En Espera" %></td>
                                 </tr>
