@@ -2,7 +2,6 @@
 package com.hackandboss.gestiondeturnos.persistencia;
 
 import com.hackandboss.gestiondeturnos.logica.Ciudadano;
-import com.hackandboss.gestiondeturnos.logica.Turno;
 import com.hackandboss.gestiondeturnos.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -10,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -149,6 +149,11 @@ public class CiudadanoJpaController implements Serializable {
             Query q = em.createQuery(cq);
             return (Ciudadano) q.getSingleResult();
         } 
+        catch (NoResultException e) {
+            // Manejo de la excepción cuando no se encuentra ningún ciudadano con el DNI especificado
+            System.out.println("No se encontró ningún ciudadano con el DNI proporcionado: " + dni);
+            return null;
+        }
         finally {
             em.close();
         }

@@ -3,6 +3,7 @@ package com.hackandboss.gestiondeturnos.logica;
 
 import com.hackandboss.gestiondeturnos.persistencia.ControladoraPersistencia;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controladora {
@@ -50,6 +51,12 @@ public class Controladora {
         
         Ciudadano ciudadano = controlPersis.buscarCiudadano(dni);
         
+        if (ciudadano == null) {
+            
+            List<Turno> listaVacia = new ArrayList<>();
+            
+            return  listaVacia;
+        }
         
         List<Turno> turnosCiudadanoActivos = controlPersis.buscarTurnosCiudadano(ciudadano.getId()).stream()
                 .filter( turno -> turno.isBorrado() == false)
@@ -64,9 +71,19 @@ public class Controladora {
         return controlPersis.buscarTurno(id);
     }
 
-    public void editarTurno(Turno turno, Tramite tramite) {
+    public void editarTurno(Turno turno, Tramite tramite, String filtro) {
         
-        turno.setTramite(tramite);
+        System.out.println("filtro " + filtro);
+        
+         if( filtro.equalsIgnoreCase("borrar")) {
+             
+             turno.setBorrado(true);
+         }
+         else {
+             
+            turno.setTramite(tramite);
+         }
+        
 
         controlPersis.editarTurno(turno);
     }

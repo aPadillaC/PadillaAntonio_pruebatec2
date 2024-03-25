@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet(name = "TurnosFechaSV", urlPatterns = {"/TurnosFechaSV"})
@@ -32,11 +33,19 @@ public class TurnosFechaSV extends HttpServlet {
             throws ServletException, IOException {
         
         List<LocalDate> fechas = control.listadoFechas();
-        
-        request.setAttribute("fechas", fechas);
-        
-        
-        request.getRequestDispatcher("filtroFecha.jsp").forward(request, response);
+//        
+//        request.setAttribute("fechas", fechas);
+//        
+//        request.getRequestDispatcher("filtroFecha.jsp").forward(request, response);
+
+        // Obtener la sesión
+        HttpSession session = request.getSession();
+
+        // Guardar un valor en la sesión
+        session.setAttribute("fechas", fechas);
+
+        // Redirigir a otra página
+        response.sendRedirect("filtroFecha.jsp");
         
     }
 
@@ -51,10 +60,10 @@ public class TurnosFechaSV extends HttpServlet {
         LocalDate fecha = LocalDate.parse(fechaString);
         String estado = request.getParameter("estado");        
                 
-        List<Turno> turnosFiltrado = control.turnosFiltrados(fecha, estado);        
-        
+        List<Turno> turnosFiltrado = control.turnosFiltrados(fecha, estado);       
+       
         request.setAttribute("turnosFiltrado", turnosFiltrado);  
-        
+       
         request.setAttribute("estado", estado);        
         
         request.getRequestDispatcher("filtroFecha.jsp").forward(request, response);

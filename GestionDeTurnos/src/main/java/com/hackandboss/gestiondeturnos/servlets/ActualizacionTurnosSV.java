@@ -36,8 +36,6 @@ public class ActualizacionTurnosSV extends HttpServlet {
         
         Turno turno = control.buscarTurno(id);
         
-         System.out.println("listaTramites " + listaTramites);
-        
         request.setAttribute("tramites", listaTramites);
         request.setAttribute("turno", turno);
         
@@ -48,19 +46,20 @@ public class ActualizacionTurnosSV extends HttpServlet {
 
     
     
-    // Actualizo el atributo tramite de Turnos 
+    // Actualizo el atributo "tramite" o "borrado" lógicamente un turno 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         String tramiteString = request.getParameter("tramite");
         String id = request.getParameter("id");
+        String filtro = request.getParameter("filtro");
         
         Tramite tramite = control.obtenerTramiteSeleccionado(tramiteString);
                 
         Turno turno = control.buscarTurno(id);
         
-        control.editarTurno(turno, tramite);
+        control.editarTurno(turno, tramite, filtro);
         
         
         response.sendRedirect("vistaPrincipal.jsp");

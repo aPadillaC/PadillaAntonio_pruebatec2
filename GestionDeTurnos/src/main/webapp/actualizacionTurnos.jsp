@@ -54,7 +54,13 @@
                         <form action="TurnoSV" method="get">
                             <div class="form-group w-25 ">
                                 <label for="nombre" class="custom-text-shadow">Introduce su DNI para mostrar sus tramites pendientes:  </label>
-                                <input type="text" class="form-control custom-box-shadow" id="dni" name="dni" placeholder="Ingrese su DNI">
+                                <input type="text" class="form-control custom-box-shadow" id="dni" name="dni" placeholder="11111111X">
+                                <% 
+                                    String error = (String) request.getAttribute("error");
+                                    if (error != null) {
+                                %>
+                                <div class=" font-weight-bold text-danger"><%= error %></div>
+                                <% } %>
                             </div>
                             <button type="submit" class="btn btn-primary custom-box-shadow" name="siguiente">Siguiente</button>
                         </form>
@@ -91,10 +97,14 @@
                                         <td><%= turno.getFecha()%></td>
                                         <td><%= turno.getTramite().getDescripcion()%></td>                               
                                         <td><%= turno.isEstadoCompletado() ? "Atendido" : "En Espera" %></td>
-                                        <td>
-                                            <form class="d-flex justify-content-around align-items-center" action="ActualizacionTurnosSV" method="get">
+                                        <td class="d-flex justify-content-around">
+                                            <form action="ActualizacionTurnosSV" method="get">
                                                 <input type="hidden" name="id" value="<%= turno.getId()%>">
-                                                <button type="submit" class="btn btn-success custom-box-shadow">Editar</button>
+                                                <button type="submit" class="btn btn-success custom-box-shadow">Editar</button>                                                
+                                            </form>
+                                            <form action="ActualizacionTurnosSV" method="post">
+                                                <input type="hidden" name="id" value="<%= turno.getId()%>">
+                                                <input type="hidden" name="filtro" value="borrar">
                                                 <button type="submit" class="btn btn-danger custom-box-shadow">Eliminar</button>
                                             </form>
                                         </td>
@@ -131,7 +141,8 @@
                                 <% } %>
                             </select>
                           </div>
-                           <input type="hidden" name="id" value="<%= turnoSeleccionado.getId()%>">  
+                           <input type="hidden" name="id" value="<%= turnoSeleccionado.getId()%>">
+                           <input type="hidden" name="filtro" value="editar">
                           <button type="submit" class="btn btn-success custom-box-shadow" name="guardar">Aceptar cambio</button>
                         </form>
                         <hr class="border-dark">

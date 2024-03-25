@@ -1,6 +1,7 @@
 com\hackandboss\gestiondeturnos\logica\Tramite.class
 com\hackandboss\gestiondeturnos\logica\Ciudadano.class
 com\hackandboss\gestiondeturnos\servlets\CiudadanoSV.class
+com\hackandboss\gestiondeturnos\logica\ValidadorDni.class
 com\hackandboss\gestiondeturnos\persistencia\exceptions\NonexistentEntityException.class
 com\hackandboss\gestiondeturnos\persistencia\TurnoJpaController.class
 com\hackandboss\gestiondeturnos\logica\Turno.class

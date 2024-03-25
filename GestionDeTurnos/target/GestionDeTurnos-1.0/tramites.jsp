@@ -17,7 +17,6 @@
                 background-position: center;
                 background-repeat: no-repeat;
                 height: 100vh; /* Ajusta la altura al 100% del viewport */
-                 /* Elimina el margen predeterminado */
                 width: 100%;
             }
             .custom-text-shadow {
@@ -76,7 +75,13 @@
                         <form action="TurnoSV" method="post">
                             <div class="form-group w-25">
                                 <label for="nombre">Ingrese su DNI: </label>
-                                <input type="text" class="form-control custom-box-shadow" id="dni" name="dni" placeholder="Ingrese su DNI">
+                                <input type="text" class="form-control custom-box-shadow" id="dni" name="dni" placeholder="11111111X">
+                                <% 
+                                    String error = (String) request.getAttribute("error");
+                                    if (error != null) {
+                                %>
+                                <div class=" font-weight-bold text-danger"><%= error %></div>
+                                <% } %>
                             </div>
                             <div class="form-group w-25">
                                 <label for="ciudad">Selecciona una opción</label>

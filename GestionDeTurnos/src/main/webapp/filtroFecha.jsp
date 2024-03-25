@@ -1,6 +1,4 @@
 
-
-
 <%@page import="com.hackandboss.gestiondeturnos.logica.Turno"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="com.hackandboss.gestiondeturnos.logica.Tramite"%>
@@ -50,17 +48,16 @@
             
             <div class="bg-image">
                 
-                <div class="bg-container">
-            
+                <div class="bg-container">            
                     
                 <!-- Filtramos por la fecha que queramos -->
-                <% if (request.getAttribute("turnosFiltrado") == null) { %>
+                <% if (request.getAttribute("turnosFiltrado") == null) { %>                
                 <form action="TurnosFechaSV" method="post">
                   <div class="form-group w-25">
                       <label for="ciudad" class="custom-text-shadow">Selecciona una fecha</label>
                     <select class="form-control custom-box-shadow" name="fecha">
-                        <%  
-                            List<LocalDate> fechas = (List<LocalDate>) request.getAttribute("fechas");
+                       <%  
+                            List<LocalDate> fechas = (List<LocalDate>) session.getAttribute("fechas");
                             for ( LocalDate fecha : fechas) {
                         %>
                         <option value="<%= fecha%>"><%= fecha %></option>
@@ -96,20 +93,20 @@
                                 List<Turno> listadoOrdenado = (List<Turno>) request.getAttribute("turnosFiltrado");
                                 for ( Turno turno : listadoOrdenado) { 
                                 %>
-                                    <tr>
-                                        <td><%= turno.getId() %></td>
-                                        <td><%= turno.getCiudadano().getDni()%></td>
-                                        <td><%= turno.getFecha()%></td>
-                                        <td><%= turno.getTramite().getDescripcion()%></td>                               
-                                        <td><%= turno.isEstadoCompletado() ? "Atendido" : "En Espera" %></td>
-                                    </tr>
+                                <tr>
+                                    <td><%= turno.getId() %></td>
+                                    <td><%= turno.getCiudadano().getDni()%></td>
+                                    <td><%= turno.getFecha()%></td>
+                                    <td><%= turno.getTramite().getDescripcion()%></td>                               
+                                    <td><%= turno.isEstadoCompletado() ? "Atendido" : "En Espera" %></td>
+                                </tr>
                                 <% } %>
                             </tbody>
                         </table>
 
                             
                         <!-- Filtro para ver solo turnos En Espera o Atendidos en la fecha indicada-->
-                        <% if (request.getAttribute("estado") == null) { %>
+                        
                         <form action="TurnosFechaSV" method="post">
                             <div class="form-group w-25">
                                 <label for="ciudad" class="custom-text-shadow">Filtrar por estado:</label>
@@ -128,8 +125,14 @@
                         </form>
                         <% } %>                        
                         <hr class="border-dark">
-                        <button class="btn btn-primary custom-box-shadow"><a href="vistaPrincipal.jsp" class="text-decoration-none text-white">Volver al menú principal</a></button>
-                    <% } %>
+                        <div class="d-flex justify-content-around">
+                            <button class="btn btn-primary custom-box-shadow"><a href="vistaPrincipal.jsp" class="text-decoration-none text-white">Volver al menú principal</a></button>
+                           <% if (request.getAttribute("turnosFiltrado") != null) { %> 
+                            <button onclick="miFuncion()" class="btn btn-success custom-box-shadow"><a href="filtroFecha.jsp" class="text-decoration-none text-white">Volver a filtrar por otra fecha</a></button>
+                            <% } %>
+                        </div>
+                        
+                    
                 
                 
             </div>

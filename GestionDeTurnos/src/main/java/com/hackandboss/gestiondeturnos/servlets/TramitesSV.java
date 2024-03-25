@@ -51,16 +51,7 @@ public class TramitesSV extends HttpServlet {
         
         
         List<Tramite> listaTramites = control.listaTramites();
-        
-        //if ( listaTramites.isEmpty() ) {
-            
-            //control.crearTramite(new Tramite("Multa"));
-            //control.crearTramite(new Tramite("Vehiculos"));
-            //control.crearTramite(new Tramite("Permiso Conducir"));
-            //control.crearTramite(new Tramite("Otros"));
-        //}
-        
-        
+                
         response.sendRedirect("vistaPrincipal.jsp");
     }
     
