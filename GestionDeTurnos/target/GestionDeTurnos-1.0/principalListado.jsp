@@ -55,6 +55,8 @@
             
             <div class="bg-image">
             
+                
+                <!-- Botones para elegir entre Listado Total o la búsqueda por fecha -->
                 <% if (request.getAttribute("listadoOrdenado") == null) { %>
                     <div class="d-flex justify-content-around centered">
                         <form action="ListadoTurnosSV" method="get">
@@ -98,6 +100,7 @@
                                         <td><%= turno.isEstadoCompletado() ? "Atendido" : "En Espera" %></td>
                                         <td>
                                             <form action="ListadoTurnosSV" method="post">
+                                                <!-- uso el input type=hidden para enviar al servlets el valor del turno seleccionada para hacer la opción y poder usarlo -->
                                                 <input type="hidden" name="id" value="<%= turno.getId()%>">
                                                 <button type="submit" class="btn btn-success custom-box-shadow">Atender</button>
                                             </form>

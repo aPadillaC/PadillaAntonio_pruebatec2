@@ -47,7 +47,7 @@
             
             
                 
-                <!<!-- Solicitud del dni para mostrar todos los turnos del Usuario -->
+                <!-- Solicitud del dni para mostrar todos los turnos del ciudadano -->
                 <% if (request.getAttribute("tramites") == null) { %>
                 <div class="bg-image">
                     <div class="bg-container pt-2">
@@ -71,7 +71,7 @@
 
 
 
-                <!-- Tabla de turnos del usuario -->
+                <!-- Tabla de turnos del ciudadano -->
                 <% if (request.getAttribute("turnosCiudadano") != null) { %>
                 <div class="bg-container mt-5">
                     
@@ -104,6 +104,7 @@
                                                 <button type="submit" class="btn btn-success custom-box-shadow">Editar</button>                                                
                                             </form>
                                             <form action="ActualizacionTurnosSV" method="post">
+                                                 <!-- uso de los inputs type=hidden para enviar al servlets el id del turno seleccionado y la variable filtro en el caso de borrar -->
                                                 <input type="hidden" name="id" value="<%= turno.getId()%>">
                                                 <input type="hidden" name="filtro" value="borrar">
                                                 <button type="submit" class="btn btn-danger custom-box-shadow">Eliminar</button>
@@ -142,6 +143,7 @@
                                 <% } %>
                             </select>
                           </div>
+                            <!-- uso de los inputs type=hidden para enviar al servlets el id del turno seleccionado y la variable filtro en el caso de querer editar -->
                            <input type="hidden" name="id" value="<%= turnoSeleccionado.getId()%>">
                            <input type="hidden" name="filtro" value="editar">
                           <button type="submit" class="btn btn-success custom-box-shadow" name="guardar">Aceptar cambio</button>

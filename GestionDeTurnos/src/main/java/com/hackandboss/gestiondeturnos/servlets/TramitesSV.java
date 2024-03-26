@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "TramitesSV", urlPatterns = {"/TramitesSV"})
 public class TramitesSV extends HttpServlet {
     
+    // Lista predefinida del listado de Tramites
     protected List<String> listaTramites = List.of("Multas",
             "Vehiculos", "Permiso Conducir", "Otros");
     
@@ -28,7 +29,7 @@ public class TramitesSV extends HttpServlet {
     }
 
     
-    // Devolvemos el listado de tramites
+    // Devolvemos el listado de tramites (tramites.jsp)
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,7 +43,8 @@ public class TramitesSV extends HttpServlet {
 
     
     
-    // Se rellena la tabla tramites con sus valores predeterminadas si no lo estuviera e crea el resto de tablas
+    // Se rellena la tabla tramites con sus valores predeterminadas si no lo 
+    // estuviera se crea el resto de tablas (index.jsp)
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -164,7 +164,10 @@ public class TurnoJpaController implements Serializable {
             em.close();
         }
     }
+    
+    
 
+    // Método para buscar todos los turnos de un ciudadano en concreto mediante su dni
     List<Turno> buscarTurnosCiudadano(Long id) {
         
         EntityManager em = getEntityManager();

@@ -26,7 +26,7 @@ public class TurnosFechaSV extends HttpServlet {
     }
 
     
-    // Obtenemos listado de fechas existente en la BBDD
+    // Obtenemos listado de fechas existente en la BBDD (principalListado.jsp)
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -50,7 +50,7 @@ public class TurnosFechaSV extends HttpServlet {
 
     
     
-    // Enviado todos los turnos por la fecha filtrada
+    // Enviado todos los turnos por la fecha filtrada (filtroFecha.jsp)
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

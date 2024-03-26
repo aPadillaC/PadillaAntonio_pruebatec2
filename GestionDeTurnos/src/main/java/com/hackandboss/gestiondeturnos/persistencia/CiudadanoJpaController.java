@@ -135,6 +135,8 @@ public class CiudadanoJpaController implements Serializable {
         }
     }
 
+    
+    // Método para buscar un ciudadano por DNI indicado
     Ciudadano buscarCiudadanoPorDni(String dni) {
         
         EntityManager em = getEntityManager();
@@ -143,7 +145,7 @@ public class CiudadanoJpaController implements Serializable {
             CriteriaQuery<Ciudadano> cq = cb.createQuery(Ciudadano.class);
             Root<Ciudadano> ciudadanoRoot = cq.from(Ciudadano.class);
 
-            // Agregar un filtro para seleccionar empleados por el atributo especificado y que estén activos
+            // Filtramos en los ciudadanos de la BBDD con el dni
             cq.where(cb.equal(ciudadanoRoot.get("dni"), dni));
 
             Query q = em.createQuery(cq);

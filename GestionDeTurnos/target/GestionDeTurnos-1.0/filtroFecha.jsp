@@ -71,8 +71,7 @@
                 
                 
 
-                <!-- Tabla de turnos filtrada por fecha -->
-                
+                <!-- Tabla de turnos filtrada por fecha -->               
                     <% if (request.getAttribute("turnosFiltrado") != null) { %>
                     <h2 class="custom-text-shadow">Listado turno de la fecha indicada:</h2>
                     <% if (request.getAttribute("estado")!= null) { %>
@@ -106,8 +105,8 @@
                         </table>
 
                             
-                        <!-- Filtro para ver solo turnos En Espera o Atendidos en la fecha indicada-->
-                        
+                            
+                        <!-- Filtro para ver solo turnos En Espera o Atendidos en la fecha indicada-->                       
                         <form action="TurnosFechaSV" method="post">
                             <div class="form-group w-25">
                                 <label for="ciudad" class="custom-text-shadow">Filtrar por estado:</label>
@@ -116,11 +115,12 @@
                                     <option value="Atendido">Atendido</option>
                                 </select>
                             </div>
-                            
+                            <!-- capturo el valor de la fecha seleccionada -->
                              <% 
                             List<Turno> listado = (List<Turno>) request.getAttribute("turnosFiltrado");
                             LocalDate fecha = listado.get(0).getFecha();
                             %>
+                            <!-- uso el input type=hidden para enviar al servlets el valor de la fecha seleccionada ya que me hará falta -->
                             <input type="hidden" value="<%=fecha%>" name="fecha">
                             <button type="submit" class="btn btn-primary custom-box-shadow" name="guardar">Filtrar</button>                          
                         </form>

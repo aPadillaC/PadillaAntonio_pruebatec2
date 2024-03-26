@@ -23,7 +23,7 @@ public class ListadoTurnosSV extends HttpServlet {
     }
 
     
-    // Mostramos listado de turnos pendientes 
+    // Mostramos listado de turnos pendientes (principalListado.jsp)
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -37,7 +37,7 @@ public class ListadoTurnosSV extends HttpServlet {
 
     
     
-    // Marcar en la BBDD el turno como COMPLETADO
+    // Marcar en la BBDD el turno como COMPLETADO (principalListado.jsp)
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

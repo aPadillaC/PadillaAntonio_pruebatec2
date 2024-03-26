@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class TurnoSV extends HttpServlet {
     
     Controladora control = new Controladora();
+    // instancia de la clase validador para comprobar el formato y el valor del DNI introducido
     ValidadorDni validador = new ValidadorDni();
     
 
@@ -29,7 +30,7 @@ public class TurnoSV extends HttpServlet {
     }
 
     
-    // Mostramos todos los turnos de un ciudadano
+    // Mostramos todos los turnos de un ciudadano (actualizacionTurnos.jsp)
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,6 +40,7 @@ public class TurnoSV extends HttpServlet {
         // Validamos el DNI introducido
         boolean valiDni = validador.validar(dni);
         
+        // Si el valor del DNI no es valido entra en el if y envia el error
         if (!valiDni) {
             
             List<Tramite> tramites = control.listaTramites();
@@ -49,9 +51,10 @@ public class TurnoSV extends HttpServlet {
         
         List<Turno> turnosCiudadano = control.buscarTurnosCiudadano(dni);
         
+        // Si el dni introducido no tiene ningun turno pendiente se le envia el error
         if (turnosCiudadano.isEmpty()) {
             
-             request.setAttribute("error", "No se encontró ningún registro con el DNI proporcionado.");
+             request.setAttribute("error", "No se encontró ningún registro pendiente con el DNI proporcionado.");
              request.getRequestDispatcher("actualizacionTurnos.jsp").forward(request, response);
         }
         
@@ -62,7 +65,7 @@ public class TurnoSV extends HttpServlet {
     }
 
     
-    // Creamos un nuevo turno
+    // Creamos un nuevo turno (tramites.jsp)
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -74,6 +77,7 @@ public class TurnoSV extends HttpServlet {
         // Validamos el DNI introducido
         boolean valiDni = validador.validar(dni);
                 
+        // Si el valor del DNI no es valido entra en el if y envia el error
         if (!valiDni) {
             
             List<Tramite> tramites = control.listaTramites();

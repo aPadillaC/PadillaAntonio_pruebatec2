@@ -8,23 +8,26 @@ import java.util.List;
 
 public class Controladora {
     
+    // Instancia de la ControladoraPersistencia
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
 
+    
+    //--------------------------------------------
+    
+    // 1) Métodos de creación
+    
     public void crearTramite(Tramite tramite) {
         
         controlPersis.crearTramite(tramite);
     }
-
-    public List<Tramite> listaTramites() {
-        
-        return controlPersis.listaTramites();
-    }
-
+    
+    
     public void crearCiudadano(Ciudadano ciudadano) {
         
         controlPersis.crearCiudadano(ciudadano);
     }
-
+    
+    
     public void crearTurno(Ciudadano ciudadano, Tramite tramite) {
         
         Turno turno = new Turno();
@@ -34,9 +37,49 @@ public class Controladora {
         
         controlPersis.crearTurno(turno);
     }
+    
+    
+    
+    //----------------------------------------------
+    
+    // 2) Métodos de obtenión de listas completas 
 
+    public List<Tramite> listaTramites() {
+        
+        return controlPersis.listaTramites();
+    }
+    
+    
+    public List<Turno> listadoTotalTurnos() {
+        
+        // filtramos por la condicion de que no este borrado ni completado el turno
+        return controlPersis.listadoTotalTurnos().stream()
+                .filter( turno -> turno.isBorrado() == false)
+                .filter( turno -> turno.isEstadoCompletado() == false)
+                .toList();
+        
+    }
+    
+    
+    public List<LocalDate> listadoFechas() {
+        
+        // mapeamos el listado de turnos para quedarnos solamente con las fechas y luego las agrupamos para obtener un listado sin fechas repetidas
+         return listadoTotalTurnos().stream()
+                .map( turno -> turno.getFecha())
+                .distinct()
+                .toList();
+                
+    }
+    
+    
+    
+    //----------------------------------------------
+    
+    // 3) Métodos filtrado información por algun parámetro pasado
+  
     public Ciudadano buscarCiudadano(String dni) {
 
+        // comparamos si el dni existe o no ya en la BBDD
         Ciudadano ciudadano = controlPersis.listaCiudadanos().stream()
                 .filter( c -> c.getDni().equalsIgnoreCase(dni))
                 .findFirst()
@@ -46,11 +89,13 @@ public class Controladora {
         return ciudadano;
     }
 
+    
     public List<Turno> buscarTurnosCiudadano(String dni) {
         
         
         Ciudadano ciudadano = controlPersis.buscarCiudadano(dni);
         
+        // si el ciudadano no existe devolvemos una lista vacia que la utilizaremos en el servlets como bandera
         if (ciudadano == null) {
             
             List<Turno> listaVacia = new ArrayList<>();
@@ -66,48 +111,18 @@ public class Controladora {
         return turnosCiudadanoActivos;
     }
 
+    
     public Turno buscarTurno(String id) {
         
         return controlPersis.buscarTurno(id);
     }
 
-    public void editarTurno(Turno turno, Tramite tramite, String filtro) {
-        
-        System.out.println("filtro " + filtro);
-        
-         if( filtro.equalsIgnoreCase("borrar")) {
-             
-             turno.setBorrado(true);
-         }
-         else {
-             
-            turno.setTramite(tramite);
-         }
-        
-
-        controlPersis.editarTurno(turno);
-    }
-
-    public List<Turno> listadoTotalTurnos() {
-        
-        return controlPersis.listadoTotalTurnos().stream()
-                .filter( turno -> turno.isBorrado() == false)
-                .filter( turno -> turno.isEstadoCompletado() == false)
-                .toList();
-        
-    }
-
-    public List<LocalDate> listadoFechas() {
-        
-         return listadoTotalTurnos().stream()
-                .map( turno -> turno.getFecha())
-                .distinct()
-                .toList();
-                
-    }
-
+    
     public List<Turno> turnosFiltrados(LocalDate fecha, String estado) {
         
+        
+        // Si la bandera "estado" es nula significa que el usuario no ha seleccionado el 
+        // filtro de estado por lo que se envia el listado con el filtro solo de la fecha
         if( estado == null) {
             return controlPersis.listadoTotalTurnos().stream()
                 .filter( turno -> turno.isBorrado() == false)
@@ -116,6 +131,7 @@ public class Controladora {
         }
         else {
             
+            // si "estado" tiene valor evaluamos cual es para que filtremos según corresponda
             if ("Atendido".equals(estado)){
                 
                 return controlPersis.listadoTotalTurnos().stream()
@@ -134,20 +150,63 @@ public class Controladora {
            
         }
     }
-
+    
+    
     public Tramite obtenerTramiteSeleccionado(String tramiteString) {
         
+        // traemos el tramite correspondiente al seleccionado por el usuario
         return listaTramites().stream()
                 .filter( t -> t.getDescripcion().equalsIgnoreCase(tramiteString))
                 .findFirst()
                 .orElse(new Tramite());
     }
 
+    
+    
+     //----------------------------------------------
+    
+    // 4) Métodos de edición de algun de los atributos de turno
+    
+    public void editarTurno(Turno turno, Tramite tramite, String filtro) {
+        
+        
+        // con el valor de "filtro" usado como vandera se realizará una opción o otra
+         if( filtro.equalsIgnoreCase("borrar")) {
+             
+             turno.setBorrado(true);
+         }
+         else {
+             
+            turno.setTramite(tramite);
+         }
+        
+
+        controlPersis.editarTurno(turno);
+    }
+
+    
+    public void turnoCompletado(String id) {
+        
+        Turno turno = controlPersis.buscarTurno(id);
+        
+        turno.setEstadoCompletado(true);
+        
+        controlPersis.editarTurno(turno);
+    }
+    
+
+    
+    //----------------------------------------------
+    
+    // 4) Métodos de verificación
+    
     public Ciudadano verificarCrearCiudadano(String dni) {
         
         //Compruebo si el dni existe ya en la BBDD
         Ciudadano ciudadano = buscarCiudadano(dni);
         
+        
+        // Si no existe creo una nueva instancia de este DNI en la BBDD
         if (ciudadano.getDni() == null) {
             
             ciudadano.setDni(dni);
@@ -157,19 +216,12 @@ public class Controladora {
         return ciudadano;
     }
 
-    public void turnoCompletado(String id) {
-        
-        Turno turno = controlPersis.buscarTurno(id);
-        
-        turno.setEstadoCompletado(true);
-        
-        controlPersis.editarTurno(turno);
-    }
 
     public void verificarInsertarTramites(List<String> listaTramites) {
         
         List<Tramite> tramites = listaTramites();
         
+        // Si la tabla de tramites está vacia, la relleno con el listado predeterminado como atributo en el servlets TramitesSV
         if ( tramites.isEmpty() ) {
             
             listaTramites.forEach( tramite -> crearTramite(new Tramite(tramite)));

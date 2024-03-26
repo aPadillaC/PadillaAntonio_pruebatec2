@@ -25,7 +25,7 @@ public class ActualizacionTurnosSV extends HttpServlet {
     }
 
     
-    // Obtengo el turno seleccionado para editar y lo envio junto al listado de tramites
+    // Obtengo el turno seleccionado para editar y lo envio junto al listado de tramites (actualizacionTurnos.jsp)   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,7 +46,7 @@ public class ActualizacionTurnosSV extends HttpServlet {
 
     
     
-    // Actualizo el atributo "tramite" o "borrado" lógicamente un turno 
+    // Actualizo el atributo "tramite" o "borrado" lógicamente un turno (actualizacionTurnos.jsp)
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
