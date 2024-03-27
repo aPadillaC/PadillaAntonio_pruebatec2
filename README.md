@@ -1,4 +1,4 @@
-# EmpleadosAdmin
+# GestionDTurnos
 <p dir="auto">Esta aplicación de gestión de turnos ha sido desarrollada para satisfacer las necesidades de una entidad gubernamental en la administración eficiente de sus trámites y ciudadanos asignados a los mismos. Permite la gestión de turnos numerados y su respectivo estado, ya sea "En espera" o "Ya atendido", así como, editar y eliminar cada uno de los turnos.</p>
 
 <!-- Tecnologías Utilizadas -->
