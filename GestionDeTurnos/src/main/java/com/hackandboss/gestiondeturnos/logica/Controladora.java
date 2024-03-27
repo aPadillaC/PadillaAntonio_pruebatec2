@@ -5,11 +5,18 @@ import com.hackandboss.gestiondeturnos.persistencia.ControladoraPersistencia;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Controladora {
     
     // Instancia de la ControladoraPersistencia
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
+    
+    
+    // Creamos PREDICATE para las condiciones repetitivas
+    Predicate<Turno> isBorrado = turno -> turno.isBorrado() == false;
+    Predicate<Turno> isEstadoCompletado = turno -> turno.isEstadoCompletado()== false;
+
 
     
     //--------------------------------------------
@@ -54,8 +61,8 @@ public class Controladora {
         
         // filtramos por la condicion de que no este borrado ni completado el turno
         return controlPersis.listadoTotalTurnos().stream()
-                .filter( turno -> turno.isBorrado() == false)
-                .filter( turno -> turno.isEstadoCompletado() == false)
+                .filter( isBorrado)
+                .filter( isEstadoCompletado)
                 .sorted((x, y) -> x.getFecha().compareTo(y.getFecha()))
                 .toList();
         
@@ -66,7 +73,7 @@ public class Controladora {
         
         // mapeamos el listado de turnos para quedarnos solamente con las fechas y luego las agrupamos para obtener un listado sin fechas repetidas
          return controlPersis.listadoTotalTurnos().stream()
-                .filter( turno -> turno.isBorrado() == false)
+                .filter( isBorrado)
                 .map( turno -> turno.getFecha())
                 .distinct()
                 .toList();
@@ -106,8 +113,8 @@ public class Controladora {
         }
         
         List<Turno> turnosCiudadanoActivos = controlPersis.buscarTurnosCiudadano(ciudadano.getId()).stream()
-                .filter( turno -> turno.isBorrado() == false)
-                .filter(turno -> turno.isEstadoCompletado() == false)
+                .filter( isBorrado)
+                .filter(isEstadoCompletado)
                 .toList();
         
         return turnosCiudadanoActivos;
@@ -122,33 +129,32 @@ public class Controladora {
     
     public List<Turno> turnosFiltrados(LocalDate fecha, String estado) {
         
+        List<Turno> listadoFecha = controlPersis.listadoTotalTurnos().stream()
+                .filter( isBorrado)
+                .filter( turno -> turno.getFecha().equals(fecha))
+                .toList();
+        
         
         // Si la bandera "estado" es nula significa que el usuario no ha seleccionado el 
         // filtro de estado por lo que se envia el listado con el filtro solo de la fecha
         if( estado == null) {
-            return controlPersis.listadoTotalTurnos().stream()
-                .filter( turno -> turno.isBorrado() == false)
-                .filter( turno -> turno.getFecha().equals(fecha))
-                .toList();
+
+            return listadoFecha;
+            
         }
         else {
             
             // si "estado" tiene valor evaluamos cual es para que filtremos según corresponda
             if ("Atendido".equals(estado)){
                 
-                return controlPersis.listadoTotalTurnos().stream()
-                .filter( turno -> turno.isBorrado() == false)
-                .filter( turno -> turno.getFecha().equals(fecha))
-                .filter( turno -> turno.isEstadoCompletado() == true)
-                .toList();                
-            }
-            
-                
-            return controlPersis.listadoTotalTurnos().stream()
-            .filter( turno -> turno.isBorrado() == false)
-            .filter( turno -> turno.getFecha().equals(fecha))
-            .filter( turno -> turno.isEstadoCompletado() == false)
-            .toList();
+                return listadoFecha.stream()
+                        .filter( turno -> turno.isEstadoCompletado() == true)
+                        .toList();
+            }            
+              
+            return listadoFecha.stream()
+                    .filter( isEstadoCompletado)
+                    .toList();
            
         }
     }
@@ -228,14 +234,7 @@ public class Controladora {
             
             listaTramites.forEach( tramite -> crearTramite(new Tramite(tramite)));
         }
-    }
-
-    
-   
-
-    
-
-    
+    }   
     
     
 }
