@@ -21,8 +21,7 @@
 	<li><b>Agregar un nuevo turno:</b> El usuario ingresará su DNI y el trámite que desea solicitar para poder crearse la petición de nuevo turno. Previamente, se validará el DNI introducido por si cumple las condiciones y si no fuese así, se le informa al usuario mediante un mensaje por pantalla.
 	A todos los turnos creados se le asignan automáticamente la fecha del día de su creación, así como los atributos booleanos "borrado", "estadoCompletado" se setean por defecto en false.</li>
 	<br>
-	<li><b>Listar/Filtrar turnos:</b> La aplicación permite visualizar la lista completa de todos los turnos registrados junto con la información de los ciudadanos asignados a los mismos. La visualización se realiza en una tabla, lo que facilita la comprensión y la navegación de los datos. Este apartado se podría plantear como funcionalidad de un administrador o un usuario con permisos, ya que, tiene la funcionalidad de marchar un turno como "Atendido". A modo de estudio estadistico, también tiene la opción de filtrar por una fecha existente en la BBDD y a su vez, volver a filtrar ese listado con las condiciones de estado: "Atendido" o "En espera". Se ha empleado el uso de 	
-	HttpSession para poder darle reactividad a este último filtrado y poder pasar de uno a otro conservando el filtro inicial de la fecha.</li>
+	<li><b>Listar/Filtrar turnos:</b> La aplicación permite visualizar la lista completa de todos los turnos registrados junto con la información de los ciudadanos asignados a los mismos. La visualización se realiza en una tabla, lo que facilita la comprensión y la navegación de los datos. También tiene la opción de filtrar por una fecha existente en la BBDD y a su vez, volver a filtrar ese listado con las condiciones de estado: "Atendido" o "En espera". Se ha empleado el uso de	HttpSession para poder darle reactividad a este último filtrado y poder pasar de uno a otro conservando el filtro inicial de la fecha.</li>
 	<br>
 	<li><b>Actualizar/Eliminar turnos:</b> El usuario puede acceder a sus turnos pendientes por medio de la comprobación de su DNI. Una vez dentro tiene la opción de editar o borrar un turno. Si elige editar, podrá cambiar el tipo de trámite seleccionado anteriormente cuando sacó el turno. Y en la opción borrar, se realizará un borrado lógico del turno, mediante el seteo del atributo "estadoCompletado" de false a true, esto hará que desaparezca de cualquier lista/filtro existente dentro de la aplicación.</li>
 </ul>
@@ -72,6 +71,29 @@
 	<li><b>Turno: </b>Almacena todos los datos de cada turno, que tendrá por defecto el id, fecha. Además de ello tiene dos campos llamada "borrado" (para el borrado lógico) y "estadoCompletado" booleanos como filtro de busqueda.</li>
 	<br>
 	<li><b>Trámite: </b>Almacena los trámites disponibles en la aplicación.</li>
+</ul>
+
+
+
+<!-- SUPUESTOS -->
+
+<h2 dir="auto">Supuestos aplicados por el desarrollador</h2>
+<ul dir="auto">
+	<li> Teniendo en cuenta la consigna, el desarrollador ha querido dividir la aplicación en dos 	partes: 
+			<ul><br> 
+				<li><b>Trámites:</b> Sería la parte con la que el usuario/ciudadano interactuaría con la aplicación y podría crear, eliminar (borrado lógico), editar, leer sus turnos.</li>
+				<br> 
+				<li><b>Listados Turnos:</b> Tendría un enfoque más a nivel de administrador/usuario con privilegios, en donde tendría acceso al listado total de turnos pendientes y podría a dar por ATENDIDO un turno para quitarlo así del listado. Y además, tiene la opción de filtrar por una fecha existente en la BBDD y poder, a su vez, volver a filtrar ese listado por las condiciones de estado: "Atendido" o "En espera". Esto último sería muy interesante a nivel de estudío estadistico para ver la carga de trabajo de cada tipo de trámite así como su tiempo/rapidez de atención.</li>
+			</ul><br> 
+	</li>
+	<li> No se ha conciderado necesario implantar un borrado/eliminación de un usuario ya que según se interpreta de la consigna no se aprecia esta necesidad al enfocarse principalmente en la entidad TURNO.</li>
+	<br>
+	<li> La vista principal ha querido simular las distintas opciones de gestión que tiene cada una de las opciones de trámites disponibles.</li>
+	<br>
+    <li> Para darle más realismo a la prueba, se ha implementado una validación real de DNI para que solo se puedan introducir DNIs válidos con las condiciones que se aplican en la vida real.</li>
+	<br>
+	<li>Se ha desarrollado consultas a la BBDD propias a parte de las proporcionadas por JPA para realizar una mejor optimización.</li>
+	<br>
 </ul>
 
 
