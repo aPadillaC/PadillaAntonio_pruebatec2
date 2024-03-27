@@ -5,9 +5,9 @@
 
 <h2 dir="auto">Tecnologías utilizadas</h2>
 <ul dir="auto">
-	<li>Front-end: <a target="_blank" rel="noopener noreferrer nofollow" href="https://itdconsulting.com/wp-content/uploads/2022/06/vps-honduras-jsp-itdconsulting-02.webp"><img src="https://itdconsulting.com/wp-content/uploads/2022/06/vps-honduras-jsp-itdconsulting-02.webp" alt="Java JSP" data-canonical-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTHiXC1J0Tu16Edwsnf83qnm-O3DfPLxYmJw&usqp=CAU" style="max-width: 7%;"></a></li>
+	<li>Front-end: <a target="_blank" rel="noopener noreferrer nofollow" href="https://itdconsulting.com/wp-content/uploads/2022/06/vps-honduras-jsp-itdconsulting-02.webp"><img src="https://itdconsulting.com/wp-content/uploads/2022/06/vps-honduras-jsp-itdconsulting-02.webp" alt="Java JSP" data-canonical-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTHiXC1J0Tu16Edwsnf83qnm-O3DfPLxYmJw&usqp=CAU" style="max-width: 5%;"></a></li>
 	<br>
-	<li>Back-end: <a target="_blank" rel="noopener noreferrer nofollow" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTHiXC1J0Tu16Edwsnf83qnm-O3DfPLxYmJw&usqp=CAU"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTHiXC1J0Tu16Edwsnf83qnm-O3DfPLxYmJw&usqp=CAU" alt="Java" data-canonical-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTHiXC1J0Tu16Edwsnf83qnm-O3DfPLxYmJw&usqp=CAU" style="max-width: 7%;"></a></li>
+	<li>Back-end: <a target="_blank" rel="noopener noreferrer nofollow" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTHiXC1J0Tu16Edwsnf83qnm-O3DfPLxYmJw&usqp=CAU"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTHiXC1J0Tu16Edwsnf83qnm-O3DfPLxYmJw&usqp=CAU" alt="Java" data-canonical-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTHiXC1J0Tu16Edwsnf83qnm-O3DfPLxYmJw&usqp=CAU" style="max-width: 5%;"></a></li>
 	<br>
 	<li>Base de datos: <a target="_blank" rel="noopener noreferrer nofollow" href=""><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnO0xHQrNDbCdgefmnjSjUPAMIKBx2F-NOww&usqp=CAU" alt="MySQL" data-canonical-src="" style="max-width: 5%;"></a></li>
 </ul>
