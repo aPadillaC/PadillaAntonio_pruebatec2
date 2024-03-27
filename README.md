@@ -79,14 +79,16 @@
 
 <h2 dir="auto">Supuestos aplicados por el desarrollador</h2>
 <ul dir="auto">
-	<li> Teniendo en cuenta la consigna, el desarrollador ha querido dividir la aplicación en dos 	partes: 
+	<li> Teniendo en cuenta la consigna, el desarrollador ha querido dividir la aplicación en dos partes: 
 			<ul><br> 
-				<li><b>Trámites:</b> Sería la parte con la que el usuario/ciudadano interactuaría con la aplicación y podría crear, eliminar (borrado lógico), editar, leer sus turnos.</li>
+				<li><b>Trámites:</b> Es la parte con la que el usuario/ciudadano interactuaría con la aplicación y podría crear, eliminar (borrado lógico), editar, leer sus turnos.</li>
 				<br> 
 				<li><b>Listados Turnos:</b> Tendría un enfoque más a nivel de administrador/usuario con privilegios, en donde tendría acceso al listado total de turnos pendientes y podría a dar por ATENDIDO un turno para quitarlo así del listado. Y además, tiene la opción de filtrar por una fecha existente en la BBDD y poder, a su vez, volver a filtrar ese listado por las condiciones de estado: "Atendido" o "En espera". Esto último sería muy interesante a nivel de estudío estadistico para ver la carga de trabajo de cada tipo de trámite así como su tiempo/rapidez de atención.</li>
 			</ul><br> 
+		Aún así, para esta prueba no se ha implantado restricción alguna y  todo usuario de la aplicación tiene acceso total a todas las funcionalidades.
 	</li>
-	<li> No se ha conciderado necesario implantar un borrado/eliminación de un usuario ya que según se interpreta de la consigna no se aprecia esta necesidad al enfocarse principalmente en la entidad TURNO.</li>
+	<br>
+	<li> No se ha considerado necesario implantar un borrado/eliminación de un usuario ya que según se interpreta en la consigna no se aprecia esta necesidad al enfocarse esta principalmente en la entidad TURNO.</li>
 	<br>
 	<li> La vista principal ha querido simular las distintas opciones de gestión que tiene cada una de las opciones de trámites disponibles.</li>
 	<br>
