@@ -88,7 +88,7 @@
 		Aún así, para esta prueba no se ha implantado restricción alguna y  todo usuario de la aplicación tiene acceso total a todas las funcionalidades.
 	</li>
 	<br>
-	<li> No se ha considerado necesario implantar un borrado/eliminación de un usuario ya que según se interpreta en la consigna no se aprecia esta necesidad al enfocarse esta principalmente en la entidad TURNO.</li>
+	<li> No se ha considerado necesario implantar un borrado/eliminación de un usuario ya que según se interpreta en la consigna no se aprecia la necesidad al enfocarse esta principalmente en la entidad TURNO.</li>
 	<br>
 	<li> La vista principal ha querido simular las distintas opciones de gestión que tiene cada una de las opciones de trámites disponibles.</li>
 	<br>
