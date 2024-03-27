@@ -56,6 +56,7 @@ public class Controladora {
         return controlPersis.listadoTotalTurnos().stream()
                 .filter( turno -> turno.isBorrado() == false)
                 .filter( turno -> turno.isEstadoCompletado() == false)
+                .sorted((x, y) -> x.getFecha().compareTo(y.getFecha()))
                 .toList();
         
     }
@@ -64,7 +65,8 @@ public class Controladora {
     public List<LocalDate> listadoFechas() {
         
         // mapeamos el listado de turnos para quedarnos solamente con las fechas y luego las agrupamos para obtener un listado sin fechas repetidas
-         return listadoTotalTurnos().stream()
+         return controlPersis.listadoTotalTurnos().stream()
+                .filter( turno -> turno.isBorrado() == false)
                 .map( turno -> turno.getFecha())
                 .distinct()
                 .toList();
